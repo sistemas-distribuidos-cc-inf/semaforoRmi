@@ -4,7 +4,8 @@
 import Pyro4
 
 objRemotoSemaforo = Pyro4.Proxy("PYRONAME:Semaforo")
-objRemotoSemaforo.produzir(223)
+
+while 1: objRemotoSemaforo.produzir(1111)
 
 
 

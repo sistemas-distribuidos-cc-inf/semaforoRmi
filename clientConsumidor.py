@@ -4,5 +4,4 @@
 import Pyro4
 
 objRemotoSemaforo = Pyro4.Proxy("PYRONAME:Semaforo")
-ret = objRemotoSemaforo.consumir()
-print ret
+while 1: objRemotoSemaforo.consumir()
