@@ -8,21 +8,16 @@ b = BufferLimitado()
 
 @Pyro4.expose
 class Semaforo(object):
-	def produzir(item):
-	    b.insert(item)
-	    print "PRODUTOR. item: ", item , " b.livre: ", b.livre, " b.cheio: ", b.cheio
-	    return (str(item))
+	def produzir(self, item):
+		self.item = item
+		b.insert(self.item)
+		print "PRODUTOR. item: ", self.item
+		return (str(item))
 
-	def consumir(item):
-	    item = b.remove()
-	    print " CONSUMIDOR. item: ", item , " b.livre: ", b.livre, " b.cheio: ",  b.cheio
-	    return (str(item))
+	def consumir(self):
+		self.item = b.remove()
+		print " CONSUMIDOR. item: ", self.item
+		return (str(self.item))
 
-daemon = Pyro4.Daemon()
-ns = Pyro4.locateNS()
-uri = daemon.register(Semaforo)
-#uri = daemon.register(Consumo)
-ns.register("exemplo.consumo",uri)
-
+Pyro4.Daemon.serveSimple({Semaforo: "Semaforo"})
 print "Server conectado..."
-daemon.requestLoop()

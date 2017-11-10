@@ -3,9 +3,8 @@
 
 import Pyro4
 
-Semaforo = Pyro4.Proxy("PYRONAME:exemplo.consumo")
-print "Produtor conectado..."
+objRemotoSemaforo = Pyro4.Proxy("PYRONAME:Semaforo")
+objRemotoSemaforo.produzir(223)
 
-print(Semaforo.produzir())
 
 
